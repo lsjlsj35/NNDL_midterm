@@ -1,0 +1,32 @@
+--- /root/NNDL/script/rpn.py	2025-05-27 22:47:14.593554667 +0000
++++ /root/NNDL/mmdetection/mmdet/models/dense_heads/rpn_head.py	2025-05-27 22:39:39.774225560 +0000
+@@ -1,4 +1,3 @@
+-
+ # Copyright (c) OpenMMLab. All rights reserved.
+ import copy
+ from typing import List, Optional, Tuple
+@@ -19,6 +18,9 @@
+ from .anchor_head import AnchorHead
+ 
+ 
++PROPOSAL = []
++
++
+ @MODELS.register_module()
+ class RPNHead(AnchorHead):
+     """Implementation of RPN head.
+@@ -95,6 +97,7 @@
+         x = F.relu(x)
+         rpn_cls_score = self.rpn_cls(x)
+         rpn_bbox_pred = self.rpn_reg(x)
++        print(rpn_bbox_pred.shape)
+         return rpn_cls_score, rpn_bbox_pred
+ 
+     def loss_by_feat(self,
+@@ -300,4 +303,6 @@
+             results_.scores = results.scores.new_zeros(0)
+             results_.labels = results.scores.new_zeros(0)
+             results = results_
++        scale_factor = [1 / s for s in img_meta['scale_factor']]
++        PROPOSAL.append(scale_boxes(results.bboxes[:8], scale_factor))
+         return results
