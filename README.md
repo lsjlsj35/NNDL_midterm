@@ -16,5 +16,13 @@ done
 # Train-Exp2
 ```bash
 cd mmdetection
-bash tools/dist_train.sh 
+bash tools/dist_train.sh config/CUSTOM/mask-rcnn.py 4
+bash tools/dist_train.sh config/CUSTOM/sparse.py 4
+```
+
+# Visualization-Exp2
+```bash
+CUDA_VISIBLE_DEVICES=0 python '/root/NNDL/mmdetection/tools/visualize_infer_sparse.py'
+CUDA_VISIBLE_DEVICES=0 python '/root/NNDL/mmdetection/tools/visualize_infer_mask.py'
+CUDA_VISIBLE_DEVICES=0 python '/root/NNDL/mmdetection/tools/vis_proposal.py'
 ```
