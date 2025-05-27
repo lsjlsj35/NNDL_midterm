@@ -1,3 +1,9 @@
+# Preparation
+```bash
+git clone https://github.com/open-mmlab/mmdetection.git
+```
+Follow the [installation guidance](https://mmdetection.readthedocs.io/en/latest/get_started.html) from mmdetection.
+
 # Train-Exp1
 Run `bash exp1.sh`
 
